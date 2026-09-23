@@ -8,7 +8,7 @@ The site is available in Portuguese and English.
 
 - Next.js 16 (App Router) with TypeScript
 - Tailwind CSS 4
-- No extra dependencies. The only client side JavaScript is the dark mode toggle. The drawing animations are pure CSS (scroll driven animations), and the language dropdown uses a native `<details>`.
+- No extra dependencies. Client side JavaScript is limited to the dark mode toggle and a small IntersectionObserver that starts the doodle animations when they enter the screen. The animations themselves are CSS, and the language dropdown uses a native `<details>`.
 
 All pages are generated statically at build time.
 

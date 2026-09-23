@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { About } from "@/components/about";
 import { Contact } from "@/components/contact";
+import { DrawOnScroll } from "@/components/draw-on-scroll";
 import { Experience } from "@/components/experience";
 import { Hero } from "@/components/hero";
 import { Projects } from "@/components/projects";
@@ -43,6 +44,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <Writing {...props} />
         <Contact {...props} />
       </Container>
+      <DrawOnScroll />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}

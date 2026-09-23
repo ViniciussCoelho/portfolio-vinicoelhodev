@@ -16,7 +16,7 @@ export function Contact({ t }: I18nProps) {
   return (
     <Section id="contact">
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
-        <div className="lg:col-span-7">
+        <div className="min-w-0 lg:col-span-7">
           <SectionTitle id="contact" number="06." doodle="none" className="rotate-1" titleClassName="font-sans text-3xl font-light">
             {t.contact.title}
           </SectionTitle>
@@ -38,15 +38,15 @@ export function Contact({ t }: I18nProps) {
           </p>
         </div>
 
-        <div className="relative lg:col-span-5 lg:self-end">
+        <div className="relative min-w-0 lg:col-span-5 lg:self-end">
           <Note className="mb-6 -rotate-2">{t.contact.note}</Note>
-          <Doodle name="bracket" stretch strokeWidth={2} className="absolute top-14 bottom-0 -left-10 hidden h-auto w-5 text-muted lg:block" />
+          <Doodle name="bracket" stretch strokeWidth={2} className="absolute top-14 -left-10 hidden h-[calc(100%-3.5rem)] w-5 text-muted lg:block" />
           {configured.length > 0 && (
             <dl className="space-y-5">
               {configured.map((c) => (
                 <div key={c.label}>
                   <dt className="font-sans text-sm font-light tracking-wide text-muted uppercase">{c.label}</dt>
-                  <dd className="mt-1 text-xl break-words sm:text-2xl">
+                  <dd className="mt-1 text-lg [overflow-wrap:anywhere] sm:text-2xl">
                     <TextLink href={c.href} newTabLabel={t.newTab}>{c.display}</TextLink>
                   </dd>
                 </div>

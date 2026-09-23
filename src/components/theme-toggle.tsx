@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * The only client-side JS on the page. Both icons are rendered and CSS picks
- * the visible one from `data-theme`, so the server markup never mismatches.
+ * Both icons are rendered and CSS picks the visible one from `data-theme`, so
+ * the server markup never mismatches.
  */
 export function ThemeToggle({ label }: { label: string }) {
   function toggle() {

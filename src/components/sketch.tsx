@@ -5,8 +5,8 @@ import type { CSSProperties } from "react";
  * animating stroke-dashoffset (see `.draw-*` in globals.css).
  *
  *   trigger="load"   draws once when the page loads (hero)
- *   trigger="scroll" draws as the element scrolls into view (scroll-driven
- *                    animation; browsers without support just show it drawn)
+ *   trigger="scroll" draws once when it scrolls into view (see DrawOnScroll;
+ *                    without JS it is just shown drawn)
  */
 
 type Trigger = "load" | "scroll";

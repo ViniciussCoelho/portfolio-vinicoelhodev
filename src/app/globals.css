@@ -225,13 +225,12 @@
     animation: draw var(--dur, 0.8s) ease-out var(--delay, 0s) forwards;
   }
 
-  @supports (animation-timeline: view()) {
-    .draw-scroll path {
-      stroke-dashoffset: 1.001;
-      animation: draw linear both;
-      animation-timeline: view();
-      animation-range: entry 15% cover 40%;
-    }
+  /* Hidden until DrawOnScroll marks the doodle as in view. */
+  .draw-ready .draw-scroll path {
+    stroke-dashoffset: 1.001;
+  }
+  .draw-ready .draw-scroll.is-drawn path {
+    animation: draw var(--dur, 0.8s) ease-out var(--delay, 0s) forwards;
   }
 
   .sketch-box:hover::before,

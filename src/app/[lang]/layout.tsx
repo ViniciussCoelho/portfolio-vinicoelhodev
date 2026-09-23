@@ -79,8 +79,9 @@ export const viewport: Viewport = {
   ],
 };
 
-// Runs before paint so the saved/system theme is applied without a flash.
-const themeScript = `try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}document.documentElement.dataset.theme=t}catch(e){}`;
+// Runs before paint: applies the saved/system theme without a flash, and
+// enables the draw-on-scroll doodles (see DrawOnScroll) when JS is available.
+const themeScript = `try{var d=document.documentElement,t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark"){t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}d.dataset.theme=t}catch(e){}if("IntersectionObserver" in window)document.documentElement.classList.add("draw-ready");`;
 
 export default async function RootLayout({ children, params }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
