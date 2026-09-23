@@ -33,14 +33,23 @@ export function Contact({ t }: I18nProps) {
             </span>
             {t.contact.sayAfter}
           </p>
-          <p className="mt-10 max-w-xl text-lg leading-[1.8]">
+          <p className="mt-10 max-w-xl text-lg leading-[1.8] hyphens-auto md:text-justify">
             {t.contact.body}
           </p>
         </div>
 
         <div className="relative min-w-0 lg:col-span-5 lg:self-end">
-          <Note className="mb-6 -rotate-2">{t.contact.note}</Note>
-          <Doodle name="bracket" stretch strokeWidth={2} className="absolute top-14 -left-10 hidden h-[calc(100%-3.5rem)] w-5 text-muted lg:block" />
+          {configured.length > 0 && (
+            <>
+              <Note className="mb-6 -rotate-2">{t.contact.note}</Note>
+              <Doodle
+                name="bracket"
+                stretch
+                strokeWidth={2}
+                className="absolute top-14 -left-10 hidden h-[calc(100%-3.5rem)] w-5 text-muted lg:block"
+              />
+            </>
+          )}
           {configured.length > 0 && (
             <dl className="space-y-5">
               {configured.map((c) => (
