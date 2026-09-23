@@ -83,7 +83,7 @@ export function Projects({ locale, t }: I18nProps) {
       ) : (
         <div className="sketch-box max-w-xl -rotate-1 p-8 md:ml-[8%]">
           <span aria-hidden="true" className="tape" />
-          <p className="text-lg leading-[1.8]">
+          <p className="text-lg leading-[1.8] hyphens-auto md:text-justify">
             {t.projects.empty}
             {isSet(links.github) && (
               <>

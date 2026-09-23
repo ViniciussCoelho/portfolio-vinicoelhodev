@@ -29,7 +29,7 @@ export function Writing({ t }: I18nProps) {
         <div className="relative lg:col-span-6 lg:col-start-7">
           <div className="sketch-box rotate-1 p-8 sm:p-10">
             <span aria-hidden="true" className="tape" />
-            <p className="font-serif text-xl leading-[1.7] sm:text-2xl sm:leading-[1.6]">{t.writing.body}</p>
+            <p className="font-serif text-xl leading-[1.7] hyphens-auto md:text-justify sm:text-2xl sm:leading-[1.6]">{t.writing.body}</p>
 
             {configured.length > 0 ? (
               <ul className="mt-8 flex flex-wrap gap-x-10 gap-y-4 text-xl">

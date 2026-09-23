@@ -58,7 +58,7 @@ export function Hero({ locale, t }: I18nProps) {
           {t.hero.roleAfter}
         </p>
 
-        <p className="mt-8 max-w-2xl text-lg leading-[1.8] sm:text-xl sm:leading-[1.75]">{hero.intro[locale]}</p>
+        <p className="mt-8 max-w-2xl text-lg leading-[1.8] hyphens-auto md:text-justify sm:text-xl sm:leading-[1.75]">{hero.intro[locale]}</p>
 
         <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4 text-lg">
           <a href="#projects" className="group inline-flex items-center gap-2 font-bold text-fg">

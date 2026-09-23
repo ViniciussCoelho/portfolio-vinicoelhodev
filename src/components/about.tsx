@@ -22,7 +22,7 @@ export function About({ locale, t }: I18nProps) {
 
         <div className="lg:col-span-8 xl:col-span-7 xl:col-start-6">
           <p className="font-serif text-2xl leading-snug sm:text-3xl sm:leading-snug">{lede}</p>
-          <div className="mt-10 grid gap-8 text-lg leading-[1.8] md:grid-cols-2 md:gap-10">
+          <div className="mt-10 max-w-3xl space-y-6 text-lg leading-[1.8] hyphens-auto md:text-justify">
             {rest.map((paragraph) => (
               <p key={paragraph.slice(0, 24)}>{paragraph}</p>
             ))}

@@ -53,7 +53,7 @@ export function Experience({ locale, t }: I18nProps) {
                       {role.highlights[locale].map((item) => (
                         <li key={item} className="flex gap-3">
                           <Doodle name="check" strokeWidth={2.2} className="mt-1 size-5 shrink-0" />
-                          <span>{item}</span>
+                          <span className="min-w-0 flex-1">{item}</span>
                         </li>
                       ))}
                     </ul>
