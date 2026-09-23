@@ -1,1 +1,267 @@
 @import "tailwindcss";
+
+/*
+ * Palette carried over from the blog: monochrome, #333 ink on white,
+ * #1a1a1a / #2d2d2d surfaces in dark mode. No accent color on purpose.
+ */
+:root {
+  --bg: #ffffff;
+  --fg: #333333;
+  --muted: #666666;
+  --line: #333333;
+  --line-soft: #d6d6d6;
+  --surface: #ffffff;
+  --code: #f6f8fa;
+  --inverse-bg: #333333;
+  --inverse-fg: #ffffff;
+  --paper-dot: #e4e4e4;
+  --tape: rgb(51 51 51 / 0.12);
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #1a1a1a;
+  --fg: #e0e0e0;
+  --muted: #b0b0b0;
+  --line: #444444;
+  --line-soft: #333333;
+  --surface: #2d2d2d;
+  --code: #2d2d2d;
+  --inverse-bg: #2d2d2d;
+  --inverse-fg: #e0e0e0;
+  --paper-dot: #2a2a2a;
+  --tape: rgb(224 224 224 / 0.14);
+  color-scheme: dark;
+}
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-soft: var(--line-soft);
+  --color-surface: var(--surface);
+  --color-code: var(--code);
+  --color-inverse-bg: var(--inverse-bg);
+  --color-inverse-fg: var(--inverse-fg);
+
+  --font-serif: var(--font-roboto-serif), ui-serif, Georgia, serif;
+  --font-sans: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+  --font-hand: var(--font-caveat), "Comic Sans MS", cursive;
+  --font-mono: ui-monospace, "Courier New", Courier, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 1.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--bg);
+    /* Dotted sketchbook paper. */
+    background-image: radial-gradient(var(--paper-dot) 1px, transparent 1.2px);
+    background-size: 26px 26px;
+    color: var(--fg);
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+  }
+
+  ::selection {
+    background-color: var(--fg);
+    color: var(--bg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--fg);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Bold ink link; a scribbled underline draws itself on hover. */
+  .ink-link {
+    position: relative;
+    font-weight: 700;
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .ink-link::after {
+    content: "";
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    bottom: -0.35em;
+    height: 0.5em;
+    background: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12' preserveAspectRatio='none'%3E%3Cpath d='M2 7 C 20 2, 40 11, 60 6 S 90 4, 98 8' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E")
+      center / 100% 100% no-repeat;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.35s ease-out;
+  }
+  .ink-link:hover::after,
+  .ink-link:focus-visible::after {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /* The blog's #tag pill. */
+  .tag {
+    display: inline-block;
+    background-color: var(--inverse-bg);
+    color: var(--inverse-fg);
+    padding: 0.2em 0.75em;
+    border-radius: 0.9375em;
+    font-size: 0.85em;
+    line-height: 1.5;
+  }
+  [data-theme="dark"] .tag {
+    background-color: #444444;
+  }
+
+  /*
+   * Hand-drawn box: two wobbly outlines (SVG displacement filters) slightly
+   * offset from each other, like a pen going around twice.
+   */
+  .sketch-box {
+    position: relative;
+    isolation: isolate;
+  }
+  .sketch-box::before,
+  .sketch-box::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border: 1.5px solid var(--fg);
+    border-radius: 3px 6px 4px 7px / 6px 3px 7px 4px;
+    pointer-events: none;
+  }
+  .sketch-box::before {
+    background: var(--surface);
+    filter: url(#rough-a);
+  }
+  .sketch-box::after {
+    inset: 3px -3px -2px 2px;
+    opacity: 0.55;
+    filter: url(#rough-b);
+  }
+
+  /* Masking tape holding a card to the page. */
+  .tape {
+    position: absolute;
+    top: -0.8rem;
+    left: 50%;
+    width: 6.5rem;
+    height: 1.6rem;
+    translate: -50% 0;
+    rotate: -3deg;
+    background: var(--tape);
+    clip-path: polygon(3% 8%, 97% 0, 100% 90%, 96% 100%, 2% 94%, 0 12%);
+  }
+
+  .hand {
+    font-family: var(--font-hand);
+    font-weight: 500;
+    line-height: 1.1;
+  }
+}
+
+/* ---------- Drawing animations ---------- */
+
+.draw-load path,
+.draw-scroll path {
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 0;
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1.001;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* "Boiling line" jitter, as in hand-drawn animation. */
+@keyframes boil {
+  0% {
+    transform: rotate(-0.4deg) translate(0.5px, 0);
+  }
+  33% {
+    transform: rotate(0.3deg) translate(-0.5px, 0.5px);
+  }
+  66% {
+    transform: rotate(0deg) translate(0, -0.5px);
+  }
+}
+
+@keyframes ear-wiggle {
+  0%,
+  100% {
+    rotate: 0deg;
+  }
+  30% {
+    rotate: -7deg;
+  }
+  65% {
+    rotate: 4deg;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .draw-load path {
+    stroke-dashoffset: 1.001;
+    animation: draw var(--dur, 0.8s) ease-out var(--delay, 0s) forwards;
+  }
+
+  @supports (animation-timeline: view()) {
+    .draw-scroll path {
+      stroke-dashoffset: 1.001;
+      animation: draw linear both;
+      animation-timeline: view();
+      animation-range: entry 15% cover 40%;
+    }
+  }
+
+  .sketch-box:hover::before,
+  .sketch-box:hover::after,
+  .boil:hover {
+    animation: boil 0.36s steps(1) infinite;
+  }
+
+  .bunny path {
+    transform-box: fill-box;
+  }
+  .bunny .bunny-ear-left {
+    transform-origin: 70% 100%;
+  }
+  .bunny .bunny-ear-right {
+    transform-origin: 30% 100%;
+  }
+  .bunny:hover .bunny-ear-left {
+    animation:
+      draw var(--dur) ease-out var(--delay) forwards,
+      ear-wiggle 0.7s ease-in-out;
+  }
+  .bunny:hover .bunny-ear-right {
+    animation:
+      draw var(--dur) ease-out var(--delay) forwards,
+      ear-wiggle 0.7s ease-in-out 0.1s reverse;
+  }
+}
+
+/* Language dropdown (<details>) */
+.lang-menu[open] .lang-chevron {
+  rotate: 180deg;
+}
