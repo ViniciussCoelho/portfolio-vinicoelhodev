@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# vinicoelho — portfolio
 
-## Getting Started
+Personal portfolio of Vinicius Coelho. Next.js (App Router) + TypeScript + Tailwind CSS v4,
+fully static, with the same visual identity as the blog.
 
-First, run the development server:
+## Running
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run lint
+npm run typecheck
+npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+In `npm run dev`, dashed hints show which values are still missing, and placeholder projects are
+visible. Neither shows up in production builds.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where to edit content
 
-## Learn More
+| What                                        | File                                      |
+| ------------------------------------------- | ----------------------------------------- |
+| Name, role, description, site URL           | `src/data/site.ts`                        |
+| GitHub, LinkedIn, email, resume, `BLOG_URL` | `src/data/site.ts`                        |
+| Hero intro and About text                   | `src/data/about.ts`                       |
+| Experience and education                    | `src/data/experience.ts`                  |
+| Projects                                    | `src/data/projects.ts`                    |
+| Tech stack                                  | `src/data/stack.ts`                       |
+| Interface strings (headings, notes, nav…)   | `src/i18n/dictionaries/{pt,en}.ts`        |
 
-To learn more about Next.js, take a look at the following resources:
+## Languages
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The site is available in Portuguese (`/pt`, default) and English (`/en`). Translatable content in
+`src/data/` is written as `{ en: "...", pt: "..." }`; plain strings (e.g. `"PostgreSQL"`) are
+shared by both languages.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`src/proxy.ts` redirects `/` to the visitor's language: the one they last picked in the header
+dropdown (remembered in a `lang` cookie), otherwise the browser's `Accept-Language`, otherwise
+Portuguese.
 
-## Deploy on Vercel
+Links can also be set through environment variables (see `.env.example`), which is handy on Vercel.
+Empty values are not rendered.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Resume: put the PDF in `public/resume.pdf` and set `resume: "/resume.pdf"`.
+Project images: put them under `public/images/projects/` and fill in `image` on the project.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+Import the repo on Vercel; no configuration needed. Set `NEXT_PUBLIC_SITE_URL` to the final domain
+so canonical URLs, Open Graph, `robots.txt` and `sitemap.xml` use it (it falls back to Vercel's
+production URL otherwise).
