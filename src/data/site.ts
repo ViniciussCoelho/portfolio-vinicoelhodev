@@ -39,3 +39,6 @@ export const links = {
 
 // TODO: URL of the blog. Also configurable via BLOG_URL.
 export const BLOG_URL = process.env.BLOG_URL ?? "";
+
+// TODO: URL of the YouTube channel. Also configurable via YOUTUBE_URL.
+export const YOUTUBE_URL = process.env.YOUTUBE_URL ?? "";

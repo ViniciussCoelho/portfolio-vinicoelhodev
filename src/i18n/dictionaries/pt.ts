@@ -10,7 +10,7 @@ export const pt: Dictionary = {
     about: "sobre",
     experience: "experiência",
     projects: "projetos",
-    writing: "textos",
+    writing: "conteúdo",
     contact: "contato",
   },
   hero: {
@@ -45,10 +45,11 @@ export const pt: Dictionary = {
     title: "Stack",
   },
   writing: {
-    title: "Textos",
-    body: "Tenho um blog onde escrevo sobre engenharia de software, principalmente sobre coisas que aparecem no dia a dia do trabalho.",
-    cta: "Ler meus artigos",
-    soon: "link em breve…",
+    title: "Conteúdo",
+    body: "Escrevo sobre engenharia de software no meu blog e também tenho um canal no YouTube.",
+    blogCta: "Ler meus artigos",
+    youtubeCta: "Ver meu canal",
+    soon: "links em breve…",
   },
   contact: {
     title: "Contato",

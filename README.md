@@ -66,4 +66,4 @@ There are two routes: `/pt` (default) and `/en`. Translated content is written a
 
 The project is ready for Vercel. Just import the repository, no extra configuration needed.
 
-After the first deploy, set `NEXT_PUBLIC_SITE_URL` with the final domain, so canonical URLs, Open Graph, `robots.txt` and `sitemap.xml` use it. Without it, the build uses the Vercel production URL. To show the blog link, set `BLOG_URL` as well.
+After the first deploy, set `NEXT_PUBLIC_SITE_URL` with the final domain, so canonical URLs, Open Graph, `robots.txt` and `sitemap.xml` use it. Without it, the build uses the Vercel production URL. To show the blog and YouTube links, set `BLOG_URL` and `YOUTUBE_URL` as well.

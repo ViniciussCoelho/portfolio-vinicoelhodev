@@ -9,7 +9,7 @@ import { Stack } from "@/components/stack";
 import { Container } from "@/components/ui";
 import { Writing } from "@/components/writing";
 import { education, experience } from "@/data/experience";
-import { links, site } from "@/data/site";
+import { links, site, YOUTUBE_URL } from "@/data/site";
 import { getDictionary, hasLocale, htmlLang } from "@/i18n";
 import { isSet, siteUrl } from "@/lib/site";
 
@@ -29,7 +29,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
     worksFor: { "@type": "Organization", name: experience[0].company },
     alumniOf: education.map((e) => ({ "@type": "CollegeOrUniversity", name: e.school })),
     knowsLanguage: ["pt-BR", "en"],
-    sameAs: [links.github, links.linkedin].filter(isSet),
+    sameAs: [links.github, links.linkedin, YOUTUBE_URL].filter(isSet),
     inLanguage: htmlLang[lang],
   };
 

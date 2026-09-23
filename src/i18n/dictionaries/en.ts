@@ -8,7 +8,7 @@ export const en = {
     about: "about",
     experience: "experience",
     projects: "projects",
-    writing: "writing",
+    writing: "content",
     contact: "contact",
   },
   hero: {
@@ -43,10 +43,11 @@ export const en = {
     title: "Tech Stack",
   },
   writing: {
-    title: "Writing",
-    body: "I have a blog where I write about software engineering, mostly about things that come up in my day to day work.",
-    cta: "Read my articles",
-    soon: "link coming soon…",
+    title: "Content",
+    body: "I write about software engineering on my blog, and I also have a YouTube channel.",
+    blogCta: "Read my articles",
+    youtubeCta: "Watch my channel",
+    soon: "links coming soon…",
   },
   contact: {
     title: "Contact",
